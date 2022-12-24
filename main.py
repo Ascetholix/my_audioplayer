@@ -1,31 +1,34 @@
-from audioplayer import*
+from audioplayer import AudioPlayer
 import tkinter  as tk
 from tkinter import filedialog
 
-def open():   # Открытие файла
-    global p
+def open():   # метод открытие файла
+    global media_file
     fname = filedialog.askopenfilename()  # путь к файлу
     if fname:
-        p = AudioPlayer(fname)    # после открытия становиться объетом audioplayer
-        p.play()         # запуск файла
+        media_file = AudioPlayer(fname)    # после открытия становиться объетом audioplayer
+        media_file.play()         # запуск файла
 
-p = None        # переменя объекта в начале пустой 
+media_file = None        # переменя объекта в начале пустая 
 
 win = tk.Tk() # начало
 
 win.title('audioplayer')    
 win.geometry("270x150+300+200") 
 
-tk.Label(text='ПРОИГРЫВАТЕЛЬ').grid(row=0,column=1)
+tk.Label(text='ПРОИГРЫВАТЕЛЬ').grid(row=0,column=1)   # Надпись
+ 
+ # кнопки запускают через лямду методы библиотеки audioplayer
 
-btn1 = tk.Button(text='Play',command=lambda:p.play())
-btn2 = tk.Button(text='Stop',command=lambda:p.stop())
-btn3 = tk.Button(text='Pause',command=lambda:p.pause())
-btn4 = tk.Button(text='Resume',command=lambda:p.resume())
-btn5 = tk.Button(text='Close',command=lambda:p.close())
+btn1 = tk.Button(text='Play',command=lambda:media_file.play())    
+btn2 = tk.Button(text='Stop',command=lambda:media_file.stop())
+btn3 = tk.Button(text='Pause',command=lambda:media_file.pause())
+btn4 = tk.Button(text='Resume',command=lambda:media_file.resume())
+btn5 = tk.Button(text='Close',command=lambda:media_file.close())
 btn6 = tk.Button(text='Open',command=open)
 
 
+# Разположение кнопок
 
 btn1.grid(row=1, column=0,stick = 'we')
 btn2.grid(row=2, column=1,stick = 'we')  
